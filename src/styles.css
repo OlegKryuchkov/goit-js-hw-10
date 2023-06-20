@@ -1,0 +1,12 @@
+.cat-info {
+    display: flex;
+    margin-top: 10px;
+}
+
+.cat-img {
+    display: block;
+}
+
+.cat-description {
+    margin-left: 10px;
+}
