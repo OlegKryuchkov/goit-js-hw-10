@@ -11,10 +11,10 @@ refs.error.setAttribute('hidden', '');
 
 fetchBreeds()
   .then(cat => {
-    const murkup = cat
+    const markup = cat
       .map(c => `<option value="${c.id}">${c.name}</option>`)
       .join('');
-    refs.select.innerHTML = murkup;
+    refs.select.innerHTML = markup;
   })
   .catch(error => {
     refs.error.removeAttribute('hidden', '');
@@ -25,7 +25,7 @@ refs.select.addEventListener('change', e => {
   refs.loader.removeAttribute('hidden', '');
   fetchCatByBreed(e.target.value)
     .then(cat => {
-      refs.catInfo.innerHTML = createMurkup(cat);
+      refs.catInfo.innerHTML = createMarkup(cat);
       refs.loader.setAttribute('hidden', '');
     })
     .catch(error => {
@@ -34,8 +34,8 @@ refs.select.addEventListener('change', e => {
     });
 });
 
-function createMurkup(cat) {
-  const murkup = cat
+function createMarkup(cat) {
+  const markup = cat
     .map(
       c =>
         `   <img class="cat-img" src="${c.url}" width="340"/>
@@ -47,5 +47,5 @@ function createMurkup(cat) {
         `
     )
     .join('');
-  return murkup;
+  return markup;
 }
