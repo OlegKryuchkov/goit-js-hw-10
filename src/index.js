@@ -7,6 +7,7 @@ const refs = {
   error: document.querySelector('.error'),
 };
 
+refs.loader.setAttribute('hidden', '');
 refs.error.setAttribute('hidden', '');
 
 fetchBreeds()
