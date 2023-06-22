@@ -7,8 +7,9 @@ const refs = {
   error: document.querySelector('.error'),
 };
 
-refs.loader.setAttribute('hidden', '');
-refs.error.setAttribute('hidden', '');
+refs.loader.style.display = 'block';
+refs.error.style.display = 'none';
+refs.select.style.display = 'none';
 
 fetchBreeds()
   .then(cat => {
@@ -16,21 +17,32 @@ fetchBreeds()
       .map(c => `<option value="${c.id}">${c.name}</option>`)
       .join('');
     refs.select.innerHTML = markup;
+    refs.loader.style.display = 'none';
+    refs.select.style.display = 'block';
   })
   .catch(error => {
-    refs.error.removeAttribute('hidden', '');
+    refs.error.style.display = 'block';
     console.log(error);
   });
 
 refs.select.addEventListener('change', e => {
-  refs.loader.removeAttribute('hidden', '');
+  refs.error.style.display = 'none';
+  refs.catInfo.innerHTML = '';
+  refs.loader.style.display = 'block';
+
   fetchCatByBreed(e.target.value)
     .then(cat => {
+      if (cat.length === 0) {
+        throw new Error(response.status);
+      }
       refs.catInfo.innerHTML = createMarkup(cat);
-      refs.loader.setAttribute('hidden', '');
+      refs.loader.style.display = 'none';
     })
     .catch(error => {
-      refs.error.removeAttribute('hidden', '');
+      console.log('Error');
+      refs.catInfo.innerHTML = '';
+      refs.loader.style.display = 'none';
+      refs.error.style.display = 'block';
       console.log(error);
     });
 });
